@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <style>
+          input {
+            margin-bottom: 10px;
+          }
+
+          .hide {
+            display: none;
+          }
+          
+          #savedMessage {
+            color: green;
+          }
+        </style>
+  </head>
+  <body>
+    <div>
+      Algolia App ID: <input type="text" autofocus id="appId"><br>
+      Algolia Search Key: <input type="text" id="appKey"><br>
+      <button id="reset">Reset Default</button>
+      <button id="save">Save</button>
+      <span class="hide" id="savedMessage">Saved!</span>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

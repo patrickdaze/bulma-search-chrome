@@ -1,0 +1,20 @@
+{
+  "name": "Search for Bulma",
+  "version": "1.0",
+  "description": "Unofficial search chrome extension for Bulma",
+  "manifest_version": 2,
+  "permissions": ["activeTab", "storage"],
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["https://bulma.io/*"],
+      "run_at": "document_end",
+      "js": [
+        "libs/vue-2.6.10.min.js",
+        "libs/algoliasearchLite-3.22.1.min.js",
+        "libs/vue-instantsearch-2.2.1.min.js",
+        "content.js"
+      ]
+    }
+  ]
+}
