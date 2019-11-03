@@ -25,7 +25,7 @@ function addSearchScripts() {
             ),
         },
     });
-  }, 1000);
+  }, 1);
 }
 
 function addSearchNavLink() {
@@ -60,48 +60,66 @@ function hideSearch() {
 
 function addSearchPane() {
   const template = `
-    <div class="section">
+    <div class="container">
+      <ais-instant-search index-name="classes" v-bind:search-client="searchClient">
         <div class="columns">
-            <div class="column">
-                <ais-instant-search index-name="classes" v-bind:search-client="searchClient">
-                    <nav class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <ais-search-box
-                                  :autofocus="true"
-                                ></ais-search-box>
-                            </div>
-                        </div>
-                        <div class="level-right">
-                            <div class="level-item">
-                                <ais-powered-by></ais-powered-by>
-                            </div>
-                        </div>
-                    </nav>
-                    <ais-hits>
-                        <div slot-scope="{ items }">
-                            <a v-for="item in items" :key="item.objectID" class="box" :href="item.url">
-                                <h2 class="title is-5 is-marginless">
-                                    {{ item.pageTitle }}
-                                    <span v-if="item.sectionTitle" class="has-text-grey">#{{ item.sectionTitle }}</span>
-                                </h2>
-                                <p v-if="item.pageBreadcrumbLevel > 1" class="has-text-grey-light"><small>{{ item.pageBreadcrumb }}</small></p>
-                                <ais-snippet attribute="sectionContent" :hit="item" :class-names="{
-                                    'ais-Snippet': 'has-text-grey-dark',
-                                    'ais-Snippet-highlighted': 'has-text-info',
-                                  }" />
-                            </a>
-                        </div>
-                    </ais-hits>
-                </ais-instant-search>
-            </div>
+          <div class="column">
+            <nav class="level bs-search_header">
+              <div class="level-left">
+                <div class="level-item">
+                    <ais-search-box
+                      placeholder="Search Bulma…"
+                      :class-names="{
+                        'ais-SearchBox-input': 'input bs-search_input',
+                        'ais-SearchBox-submit': 'is-hidden',
+                        'ais-SearchBox-reset': 'is-hidden',
+                      }"
+                      autofocus
+                    ></ais-search-box>
+                </div>
+              </div>
+              <div class="level-right">
+                <div class="level-item">
+                  <ais-powered-by />
+                </div>
+              </div>
+            </nav>
+          </div>
         </div>
+        <div class="columns bs-search_hits">
+          <div class="column">
+            <ais-hits>
+              <div slot-scope="{ items }">
+                <a v-for="item in items" :key="item.objectID" class="box" :href="item.url">
+                  <template v-if="typeof item.pageTitle === 'string'">
+                    <h2 class="title is-5 is-marginless">
+                      {{ item.pageTitle }}
+                      <span v-if="item.sectionTitle" class="has-text-grey">#{{ item.sectionTitle }}</span>
+                    </h2>
+                    <p v-if="item.pageBreadcrumbLevel > 1" class="has-text-grey-light"><small>{{ item.pageBreadcrumb }}</small></p>
+                    <ais-snippet attribute="sectionContent" :hit="item" :class-names="{
+                        'ais-Snippet': 'has-text-grey-dark',
+                        'ais-Snippet-highlighted': 'has-text-info',
+                      }" />
+                  </template>
+                  <template v-else>
+                    <h2 class="title is-5 is-marginless">
+                      {{ item.title }}
+                    </h2>
+                    <p class="has-text-grey-light"><small>{{ item.breadcrumb }}</small></p>
+                  </template>
+                </a>
+              </div>
+            </ais-hits>
+          </div>
+        </div>
+      </ais-instant-search>
     </div>
   `;
 
   const searchPane = document.createElement('div');
   searchPane.innerHTML = template;
-  searchPane.className = 'container is-hidden';
+  searchPane.className = 'is-hidden';
   searchPane.setAttribute('id', 'bs');
   const navbar = document.getElementById('navbar');
   navbar.parentNode.insertBefore(searchPane, navbar);
@@ -117,7 +135,19 @@ function addStyles() {
       background: #fff;
       left: 0;
       right: 0;
-      height: 100vh;
+      bottom: 0;
+    }
+    .bs-search_header {
+      height: 70px;
+      padding-top: 20px;
+    }
+    .bs-search_hits {
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-height: calc(100vh - 87px - 70px - 20px);
+    }
+    .bs-search_input {
+      width: 500px;
     }
   `;
 
