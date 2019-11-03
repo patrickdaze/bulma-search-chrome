@@ -1,7 +1,7 @@
 {
   "name": "Search for Bulma",
   "version": "1.0",
-  "description": "Unofficial search chrome extension for Bulma",
+  "description": "Unofficial Chrome extension to search Bulma documentation",
   "manifest_version": 2,
   "permissions": ["activeTab", "storage"],
   "options_page": "options.html",
