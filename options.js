@@ -6,6 +6,16 @@ const reset = document.getElementById('reset');
 const save = document.getElementById('save');
 const savedMessage = document.getElementById('savedMessage');
 
+chrome.storage.sync.get(['appId', 'appKey'], (settings) => {
+  if(typeof settings.appId === 'string' && settings.appId.length > 1) {
+    appId.value = settings.appId;
+  }
+  
+  if(typeof settings.appKey === 'string' && settings.appKey.length > 1) {
+    appKey.value = settings.appKey;
+  }
+});
+
 function flashSaved() {
   savedMessage.className = '';
   setTimeout(() => {
