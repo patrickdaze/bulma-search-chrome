@@ -6,18 +6,31 @@ This extension should work with most Chromium derived browsers including Avast S
 
 ## Install
 
+### Google Web Store
+
+The Google Web Store installation not yet available but [is planned](https://github.com/patrickdaze/bulma-search-chrome/issues/1). For now the unpacked version can be installed.
+
+### Install Unpacked
+
 1. Download or clone this repository to your desired location
 2. Open the Extension Management page by navigating to `chrome://extensions`
 3. Enable **Developer Mode** by clicking the toggle switch next to Developer mode
 4. Click the **load unpacked** button and select the directory where this repository was cloned/downloaded
 
-To update:
+### Updated Unpacked
 
 1. Re-download/pull the latest version of this repository to the original install location
 2. Open the Extension Management page by navigating to `chrome://extensions`
 3. Click refresh beside the already installed extension
 
-_Google web store installation to come._
+## Options
+
+[A pull request](https://github.com/thomasedwards/bulmasearch/pull/1) is opened to provide deeper search results. Until it's merged into the main Bulma Search project the following credentials can be added to the extension's options page (`chrome://extensions` then **Details** then **Options**). The contents of this search index is provided by [a forked Bulma Search](https://github.com/patrickdaze/bulmasearch/tree/index-content).
+
+```
+Application ID: W95C6T7MO0
+Application Key: 43107ef8232e4b438c5d1bf2b76916cb
+```
 
 ## Usage
 
