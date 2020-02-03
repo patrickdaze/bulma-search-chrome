@@ -12,7 +12,7 @@ The Google Web Store installation not yet available but [is planned](https://git
 
 ### Install Unpacked
 
-1. Download or clone this repository to your desired location
+1. [Download](https://github.com/patrickdaze/bulma-search-chrome/archive/master.zip) or clone this repository to your desired location
 2. Open the Extension Management page by navigating to `chrome://extensions`
 3. Enable **Developer Mode** by clicking the toggle switch next to Developer mode
 4. Click the **load unpacked** button and select the directory where this repository was cloned/downloaded
