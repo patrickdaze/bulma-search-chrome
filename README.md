@@ -25,12 +25,7 @@ The Google Web Store installation not yet available but [is planned](https://git
 
 ## Options
 
-[A pull request](https://github.com/thomasedwards/bulmasearch/pull/1) is opened to provide deeper search results. Until it's merged into the main Bulma Search project the following credentials can be added to the extension's options page (`chrome://extensions` then **Details** then **Options**). The contents of this search index is provided by [a forked Bulma Search](https://github.com/patrickdaze/bulmasearch/tree/index-content).
-
-```
-Application ID: W95C6T7MO0
-Application Key: 43107ef8232e4b438c5d1bf2b76916cb
-```
+If you wish to use your an alternaive Alogila index (your own or custom provider, probably via [Bulma Search](https://github.com/thomasedwards/bulmasearch)) you can customize the app ID and key within this extension's options.
 
 ## Usage
 
