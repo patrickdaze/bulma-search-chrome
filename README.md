@@ -25,7 +25,7 @@ The Google Web Store installation not yet available but [is planned](https://git
 
 ## Options
 
-If you wish to use your an alternaive Alogila index (your own or custom provider, probably via [Bulma Search](https://github.com/thomasedwards/bulmasearch)) you can customize the app ID and key within this extension's options.
+If you wish to use your an alternative Alogila index (your own or custom provider, probably via [Bulma Search](https://github.com/thomasedwards/bulmasearch)) you can customize the app ID and key within this extension's options.
 
 ## Usage
 
