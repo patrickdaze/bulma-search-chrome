@@ -112,7 +112,7 @@ function addSearchPane() {
               <template slot-scope="{ hits }">
                 <ais-hits v-if="hits.length > 0">
                   <div slot-scope="{ items }">
-                    <a v-for="item in items" :key="item.objectID" class="box" :href="item.url">
+                    <a v-for="item in items" :key="item.objectID" class="box" :href="'/' + item.url">
                       <template v-if="typeof item.pageTitle === 'string'">
                         <h2 class="title is-5 is-marginless">
                           {{ item.pageTitle }}
