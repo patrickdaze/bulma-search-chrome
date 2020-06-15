@@ -1,9 +1,14 @@
 {
+  "manifest_version": 2,
   "name": "Search for Bulma",
   "version": "1.0",
   "description": "Unofficial Chrome extension to search Bulma documentation",
-  "manifest_version": 2,
-  "permissions": ["activeTab", "storage"],
+  "homepage_url": "https://github.com/patrickdaze/bulma-search-chrome",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": ["storage"],
   "options_page": "options.html",
   "content_scripts": [
     {
