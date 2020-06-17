@@ -69,6 +69,7 @@ function showSearch() {
     addSearchScripts();
   }
 
+  adjustLayout();
   document.getElementsByTagName('html')[0].className += ' is-clipped';
   document.getElementById('bs').className = document.getElementById('bs').className.replace('is-hidden', '');
 }
@@ -76,6 +77,12 @@ function showSearch() {
 function hideSearch() {
   document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className.replace(' is-clipped', '');
   document.getElementById('bs').className += 'is-hidden';
+}
+
+function adjustLayout() {
+  const navbarBoundingBox = document.getElementById('navbar').getBoundingClientRect();
+  const offset = navbarBoundingBox.top + navbarBoundingBox.height + 2; // 2 for boxshadow
+  document.getElementById('bs').style.top = `${offset}px`;
 }
 
 function addSearchPane() {
