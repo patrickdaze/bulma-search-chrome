@@ -6,7 +6,7 @@ This project was built as a temporary solution for the [highly requested](https:
 
 ## Installation
 
-[<img src="imgs/docs/chrome-install.png">](https://chrome.google.com/webstore/detail/search-for-bulma/melacinmggphfalalkhedbcjgdpnohfl)
+[<img src="docs/imgs/chrome-install.png">](https://chrome.google.com/webstore/detail/search-for-bulma/melacinmggphfalalkhedbcjgdpnohfl)
 
 Install from the [Google Web Store](https://chrome.google.com/webstore/detail/search-for-bulma/melacinmggphfalalkhedbcjgdpnohfl) or [the unpacked version](docs/advanced.md#unpacked-installation).
 
