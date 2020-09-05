@@ -1,12 +1,19 @@
 'use strict';
 
+/*
+This code is pretty messy. Just hacking to together a quick solution for search.
+*/
+
 addSearchElements();
 // showSearch();
+
+let focusItem = -1;
 
 function addSearchElements() {
   addSearchNavLink();
   addSearchPane();
   addStyles();
+  addGlobalEvents();
 }
 
 function addSearchScripts() {
@@ -15,14 +22,22 @@ function addSearchScripts() {
     const defaultApp = hasCustomSettings ? settings.appId : 'HBBYL2QI18';
     const defaultKey = hasCustomSettings ? settings.appKey : 'b32e9a1c66a55cbcfcb4ef9aaaf972b5';
 
+    const searchClient = algoliasearch(
+      defaultApp,
+      defaultKey,
+    );
+
     Vue.use(VueInstantSearch);
+    
     new Vue({
         el: '#bs',
         data: {
-            searchClient: algoliasearch(
-              defaultApp,
-              defaultKey,
-            ),
+            searchClient: {
+              search(requests) {
+                focusItem = -1;
+                return searchClient.search(requests);
+              }
+            }
         },
     });
   });
@@ -53,13 +68,54 @@ function addSearchNavLink() {
   });
 }
 
+function isHidden() {
+  return document.getElementById('bs').className.includes('is-hidden');
+}
+
 function toggleSearch() {
-  const isHidden = document.getElementById('bs').className.includes('is-hidden');
-  if(isHidden) {
+  if(isHidden()) {
     showSearch();
   } else {
     hideSearch();
   }
+}
+
+function addGlobalEvents() {
+  document.body.addEventListener('keyup', (e) => {
+    if(e.key === '/' && e.target.tagName !== 'INPUT') {
+      showSearch();
+    } else if(e.key === 'Escape') {
+      hideSearch();
+    } else if(e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      if(!isHidden()) {
+        const hits = document.getElementsByClassName('ais-Hits');
+        if(hits.length === 0) {
+          return;
+        }
+
+        const items = document.getElementsByClassName('ais-Hits')[0].getElementsByClassName('box');
+        if(items.length === 0) {
+          return;
+        }
+
+        focusItem += e.key === 'ArrowDown' ? 1 : -1;
+        if(focusItem <= -1) {
+          focusItem = -1;
+          setTimeout(() => document.getElementsByClassName('ais-SearchBox-input').length >= 1 && document.getElementsByClassName('ais-SearchBox-input')[0].focus(), 10);
+          return;
+        } else if(focusItem >= items.length) {
+          focusItem = items.length - 1;
+        }
+
+        items[focusItem].focus();
+      }
+    }
+  });
+  document.body.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' && e.target.className.includes('ais-SearchBox-input')) {
+      document.getElementsByClassName('ais-Hits')[0].getElementsByClassName('box')[0].click();
+    }
+  });
 }
 
 let firstSearch = true;
@@ -69,19 +125,29 @@ function showSearch() {
     addSearchScripts();
   }
 
-  adjustLayout();
-  document.getElementsByTagName('html')[0].className += ' is-clipped';
-  document.getElementById('bs').className = document.getElementById('bs').className.replace('is-hidden', '');
+  focusItem = -1;
+
+  if(isHidden()) {
+    adjustLayout();
+    document.getElementsByTagName('html')[0].className += ' is-clipped';
+    document.getElementById('bs').className = document.getElementById('bs').className.replace('is-hidden', '');
+  }
+
+  setTimeout(() => document.getElementsByClassName('ais-SearchBox-input').length >= 1 && document.getElementsByClassName('ais-SearchBox-input')[0].focus(), 10);
 }
 
 function hideSearch() {
+  if(isHidden()) {
+    return;
+  }
+
   document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className.replace(' is-clipped', '');
   document.getElementById('bs').className += 'is-hidden';
 }
 
 function adjustLayout() {
-  const navbarBoundingBox = document.getElementById('navbar').getBoundingClientRect();
-  const offset = navbarBoundingBox.top + navbarBoundingBox.height + 2; // 2 for boxshadow
+  const navbarBoundingBoxHeight = document.getElementById('navbar').getBoundingClientRect().height + 2; // 2 for shadow/border
+  const offset = window.scrollY < navbarBoundingBoxHeight ? navbarBoundingBoxHeight - window.scrollY : 0;
   document.getElementById('bs').style.top = `${offset}px`;
 }
 
@@ -103,6 +169,9 @@ function addSearchPane() {
                       }"
                       autofocus
                     ></ais-search-box>
+                </div>
+                <div class="level-item has-text-grey-light is-size-7">
+                  Shortcuts: <span class="tag has-text-weight-bold has-text-grey mx-1">/</span> open <span class="tag has-text-weight-bold has-text-grey ml-3 mr-1">esc</span> close <span class="tag has-text-weight-bold has-text-grey ml-3">up</span>/<span class="tag has-text-weight-bold has-text-grey mr-1">down</span> select <span class="tag has-text-weight-bold has-text-grey ml-3 mr-1">enter</span> go to
                 </div>
               </div>
               <div class="level-right">
