@@ -35,7 +35,11 @@ function addSearchScripts() {
             searchClient: {
               search(requests) {
                 focusItem = -1;
-                return searchClient.search(requests);
+                return searchClient.search(requests, {
+                  analyticsTags: [
+                    'extension',
+                  ],
+                });
               }
             }
         },
