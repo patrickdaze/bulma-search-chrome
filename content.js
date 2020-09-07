@@ -174,8 +174,8 @@ function addSearchPane() {
                       autofocus
                     ></ais-search-box>
                 </div>
-                <div class="level-item has-text-grey-light is-size-7">
-                  Shortcuts: <span class="tag has-text-weight-bold has-text-grey mx-1">/</span> open <span class="tag has-text-weight-bold has-text-grey ml-3 mr-1">esc</span> close <span class="tag has-text-weight-bold has-text-grey ml-3">up</span>/<span class="tag has-text-weight-bold has-text-grey mr-1">down</span> select <span class="tag has-text-weight-bold has-text-grey ml-3 mr-1">enter</span> go to
+                <div class="level-item is-size-7">
+                  <a href="https://github.com/patrickdaze/bulma-search-chrome#usage" target="_blank">Keyboard Shortcuts</a>
                 </div>
               </div>
               <div class="level-right">
