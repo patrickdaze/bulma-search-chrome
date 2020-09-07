@@ -10,11 +10,17 @@ This project was built as a temporary solution for the [highly requested](https:
 
 Install from the [Google Web Store](https://chrome.google.com/webstore/detail/search-for-bulma/melacinmggphfalalkhedbcjgdpnohfl) or [the unpacked version](docs/advanced.md#unpacked-installation).
 
-**Compatibility:** Should work with most Chromium derived browsers including Avast Secure Browser, Blisk, Brave, Comodo Dragon, Microsoft Edge (recent versions), Yande, and more.
+**Compatibility:** Should work with most Chromium browsers including Avast Secure Browser, Blisk, Brave, Comodo Dragon, Google Chrome, Microsoft Edge (recent versions), Yande, and more.
 
 ## Usage
 
 Once installed, a search icon will appear in the main navigation of the Bulma documentation. Click it to toggle search.
+
+**Keyboard shortcuts**:  
+`/` open  
+`esc` close  
+`⬆︎`/`⬇︎` select  
+`enter` go to
 
 More options can be found in the [documentation](docs/advanced.md).
 
