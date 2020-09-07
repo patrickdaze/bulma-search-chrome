@@ -153,6 +153,11 @@ function adjustLayout() {
   const navbarBoundingBoxHeight = document.getElementById('navbar').getBoundingClientRect().height + 2; // 2 for shadow/border
   const offset = window.scrollY < navbarBoundingBoxHeight ? navbarBoundingBoxHeight - window.scrollY : 0;
   document.getElementById('bs').style.top = `${offset}px`;
+
+  const hits = document.getElementsByClassName('bs-search_hits');
+  if(hits.length > 0) {
+    hits[0].style.maxHeight = `calc(100vh - ${offset}px - 70px - 20px)`;
+  }
 }
 
 function addSearchPane() {
