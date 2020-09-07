@@ -1,0 +1,43 @@
+name: Create Release and Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.2
+      - name: Build Extension
+        uses: TheDoctor0/zip-release@0.4.1
+        with:
+          filename: 'release.zip'
+          exclusions: '*.git*'
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+      - name: Attach Extension to Release
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release.zip
+          asset_name: bulma-release.zip
+          asset_content_type: application/zip
+      - name: Publish Extension
+        uses: trmcnvn/chrome-addon@v2
+        with:
+          extension: melacinmggphfalalkhedbcjgdpnohfl
+          zip: release.zip
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
