@@ -20,3 +20,7 @@ If for some reason you're unable to [install the chrome extension from the Googl
 ## Options / Custom Index
 
 If you wish to use your an alternative Algolia index (your own or custom provider, probably via [Bulma Search](https://github.com/thomasedwards/bulmasearch)) you can customize the app ID and key within this extension's options.
+
+## Publishing
+
+[See publishing](publishing.md)
